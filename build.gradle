@@ -12,9 +12,9 @@ dependencies {
     implementation platform('org.jetbrains.kotlin:kotlin-bom')
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
 
-    implementation 'com.amazonaws:aws-lambda-java-core:1.2.0'
-    implementation 'com.google.code.gson:gson:2.8.6'
-    implementation 'com.github.DaikonWeb:daikon-core:0.0.2'
+    compile 'com.amazonaws:aws-lambda-java-core:1.2.0'
+    compile 'com.google.code.gson:gson:2.8.6'
+    compile 'com.github.DaikonWeb:daikon-core:0.0.2'
 
     testImplementation "org.junit.jupiter:junit-jupiter-api:5.5.2"
     testImplementation "org.junit.jupiter:junit-jupiter-engine:5.5.2"
