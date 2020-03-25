@@ -5,11 +5,14 @@
 Use Daikon Routing in your AWS Lambda
 
 ## How to add Daikon Lambda to your project
-[![](https://jitpack.io/v/daikonweb/daikon-lambda.svg)](https://jitpack.io/#daikonweb/daikon-lambda)
+
+[![daikon-lambda](https://jitpack.io/v/daikonweb/daikon-lambda.svg)](https://jitpack.io/#daikonweb/daikon-lambda)
 
 ### Gradle
+
 - Add JitPack in your root build.gradle at the end of repositories:
-```
+
+```groovy
 repositories {
     ...
     maven { url 'https://jitpack.io' }
@@ -17,13 +20,16 @@ repositories {
 ```
 
 - Add the dependency
-```
+
+```groovy
 implementation 'com.github.DaikonWeb:daikon-lambda:0.1.1'
 ```
 
 ### Maven
-- Add the JitPack repository to your build file 
-```
+
+- Add the JitPack repository to your build file
+
+```groovy
 <repositories>
     <repository>
         <id>jitpack.io</id>
@@ -31,8 +37,10 @@ implementation 'com.github.DaikonWeb:daikon-lambda:0.1.1'
     </repository>
 </repositories>
 ```
+
 - Add the dependency
-```
+
+```groovy
 <dependency>
     <groupId>com.github.DaikonWeb</groupId>
     <artifactId>daikon-lambda</artifactId>
@@ -41,7 +49,8 @@ implementation 'com.github.DaikonWeb:daikon-lambda:0.1.1'
 ```
 
 ## Getting Started
-```
+
+```kotlin
 class MyHandler : HttpHandler() {
     override fun routing() {
         get("/") { req, res -> res.write("Hello, I'm a daikon-lambda!") }
@@ -50,13 +59,14 @@ class MyHandler : HttpHandler() {
 ```
 
 ## Resources
-* Documentation: https://daikonweb.github.io
-* Examples: https://github.com/DaikonWeb/daikon-examples
+
+- Documentation: https://daikonweb.github.io
+- Examples: https://github.com/DaikonWeb/daikon-examples
 
 ## Authors
 
-* **[Marco Fracassi](https://github.com/fracassi-marco)**
-* **[Alessio Coser](https://github.com/AlessioCoser)**
+- **[Marco Fracassi](https://github.com/fracassi-marco)**
+- **[Alessio Coser](https://github.com/AlessioCoser)**
 
 ## License
 
