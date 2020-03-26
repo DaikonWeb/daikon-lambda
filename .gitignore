@@ -3,3 +3,7 @@
 build
 out
 *.md-e
+bin
+.settings
+.project
+.classpath
