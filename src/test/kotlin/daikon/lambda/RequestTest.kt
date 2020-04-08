@@ -60,6 +60,7 @@ class RequestTest {
         val input = apiGatewayEvent(method = "POST", path = "/")
 
         runHandler(input, output) {
+            exception(Throwable::class.java) { _, res, _ -> res.status(INTERNAL_SERVER_ERROR_500) }
             post("/") { req, res -> res.write("hello ${req.header("name")}") }
         }
 
@@ -137,6 +138,7 @@ class RequestTest {
         val input = apiGatewayEvent(method = "GET", path = "/")
 
         runHandler(input, output) {
+            exception(Throwable::class.java) { _, res, _ -> res.status(INTERNAL_SERVER_ERROR_500) }
             get("/") { req, res -> res.write(req.param(":baz")) }
         }
 
@@ -213,6 +215,7 @@ class RequestTest {
         val input = apiGatewayEvent(method = "GET", path = "/")
 
         runHandler(input, output) {
+            exception(Throwable::class.java) { _, res, _ -> res.status(INTERNAL_SERVER_ERROR_500) }
             get("/") { req, res ->
                 val attribute = req.attribute<String>("any")
                 res.write("Hello $attribute")
