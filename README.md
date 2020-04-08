@@ -22,7 +22,7 @@ repositories {
 - Add the dependency
 
 ```groovy
-implementation 'com.github.DaikonWeb:daikon-lambda:0.1.1'
+implementation 'com.github.DaikonWeb:daikon-lambda:1.0.0'
 ```
 
 ### Maven
@@ -44,7 +44,7 @@ implementation 'com.github.DaikonWeb:daikon-lambda:0.1.1'
 <dependency>
     <groupId>com.github.DaikonWeb</groupId>
     <artifactId>daikon-lambda</artifactId>
-    <version>0.1.1</version>
+    <version>1.0.0</version>
 </dependency>
 ```
 
