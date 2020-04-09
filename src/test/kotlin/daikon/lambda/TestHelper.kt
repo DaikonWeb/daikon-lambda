@@ -6,9 +6,9 @@ import java.io.ByteArrayInputStream
 import java.io.InputStream
 import java.io.OutputStream
 
-fun runHandler(input: InputStream, output: OutputStream, routes: HttpHandler.() -> Unit) {
+fun runHandler(input: InputStream, output: OutputStream, routes: LambdaCall.() -> Unit) {
     return object : HttpHandler() {
-        override fun routing() {
+        override fun LambdaCall.routing() {
             routes()
         }
     }.handleRequest(input, output, mockk())
