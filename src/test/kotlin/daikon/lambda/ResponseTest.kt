@@ -1,5 +1,7 @@
 package daikon.lambda
 
+import daikon.core.HttpStatus
+import daikon.core.HttpStatus.CONTINUE_100
 import daikon.core.HttpStatus.CREATED_201
 import daikon.core.HttpStatus.MOVED_TEMPORARILY_302
 import daikon.core.HttpStatus.OK_200
@@ -85,6 +87,38 @@ class ResponseTest {
                 "statusCode" to MOVED_TEMPORARILY_302,
                 "headers" to mapOf("Location" to "http://localhost:4545/bar"),
                 "body" to ""
+        )) }
+    }
+
+    @Test
+    fun `read response content type`() {
+        val input = apiGatewayEvent(method = "GET", path = "/")
+
+        runHandler(input, output) {
+            any("/") { _, res -> res.type("application/json")  }
+            after("/") { _, res -> res.write(res.type())  }
+        }
+
+        verify { output.json(mapOf(
+                "statusCode" to OK_200,
+                "headers" to mapOf("Content-Type" to "application/json"),
+                "body" to "application/json"
+        )) }
+    }
+
+    @Test
+    fun `read response status`() {
+        val input = apiGatewayEvent(method = "GET", path = "/")
+
+        runHandler(input, output) {
+            any("/") { _, res -> res.status(CONTINUE_100)  }
+            after("/") { _, res -> res.write("${res.status()}")  }
+        }
+
+        verify { output.json(mapOf(
+                "statusCode" to CONTINUE_100,
+                "headers" to emptyMap<String, String>(),
+                "body" to "100"
         )) }
     }
 }

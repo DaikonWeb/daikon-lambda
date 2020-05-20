@@ -43,6 +43,8 @@ data class LambdaRequest(
         return headers.containsKey(name)
     }
 
+    override fun hasParam(name: String) = try { param(name); true } catch (t: Throwable) { false }
+
     override fun body(): String {
         if(body == null) {
             return ""
@@ -71,6 +73,8 @@ data class LambdaRequest(
         @Suppress("UNCHECKED_CAST")
         return attributes[key]!! as T
     }
+
+    override fun hasAttribute(key: String) = try { attribute<Any>(key); true } catch (t: Throwable) { false }
 
     override fun method(): Method {
         return Method.valueOf(httpMethod)

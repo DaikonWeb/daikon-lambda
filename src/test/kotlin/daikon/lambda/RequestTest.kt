@@ -200,7 +200,7 @@ class RequestTest {
 
         runHandler(input, output) {
             before("/") { req, _ -> req.attribute("foo_key", "foo_value") }
-            get("/") { req, res -> res.write(req.attribute("foo_key")) }
+            get("/") { req, res -> res.write(req.attribute<String>("foo_key")) }
         }
 
         verify { output.json(mapOf(
@@ -241,6 +241,69 @@ class RequestTest {
                 "statusCode" to OK_200,
                 "headers" to emptyMap<String, String>(),
                 "body" to "POST"
+        )) }
+    }
+
+    @Test
+    fun `request has param`() {
+        val input = apiGatewayEvent(method = "POST", path = "/", queryParams = mapOf("name" to "Bob"))
+
+        runHandler(input, output) {
+            post("/") { req, res -> res.write("${req.hasParam("name")}") }
+        }
+
+        verify { output.json(mapOf(
+                "statusCode" to OK_200,
+                "headers" to emptyMap<String, String>(),
+                "body" to "true"
+        )) }
+    }
+
+    @Test
+    fun `request hasn't param`() {
+        val input = apiGatewayEvent(method = "POST", path = "/")
+
+        runHandler(input, output) {
+            post("/") { req, res -> res.write("${req.hasParam("name")}") }
+        }
+
+        verify { output.json(mapOf(
+                "statusCode" to OK_200,
+                "headers" to emptyMap<String, String>(),
+                "body" to "false"
+        )) }
+    }
+
+    @Test
+    fun `has attribute`() {
+        val input = apiGatewayEvent(method = "GET", path = "/")
+
+        runHandler(input, output) {
+            before("/") { req, _ -> req.attribute("foo_key", "foo_value") }
+            get("/") { req, res ->
+                res.write("${req.hasAttribute("foo_key")}")
+            }
+        }
+
+        verify { output.json(mapOf(
+                "statusCode" to OK_200,
+                "headers" to emptyMap<String, String>(),
+                "body" to "true"
+        )) }
+    }
+
+    @Test
+    fun `hasn't attribute`() {
+        val input = apiGatewayEvent(method = "GET", path = "/")
+
+        runHandler(input, output) {
+            get("/") { req, res -> res.write("${req.hasAttribute("any")}") }
+        }
+
+        verify { output.json(mapOf(
+                "statusCode" to OK_200,
+                "headers" to emptyMap<String, String>(),
+                "body" to "false"
         )) }
     }
 }

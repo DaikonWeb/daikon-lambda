@@ -12,8 +12,16 @@ class LambdaResponse : Response {
         writer.write(text)
     }
 
+    override fun write(byteArray: ByteArray) {
+        TODO("Not yet implemented")
+    }
+
     override fun status(code: Int) {
         statusCode = code
+    }
+
+    override fun type(): String {
+        return headers["Content-Type"] ?: ""
     }
 
     override fun type(contentType: String) {
@@ -30,6 +38,8 @@ class LambdaResponse : Response {
         status(status)
         header("Location", path)
     }
+
+    override fun status() = statusCode
 
     fun asMap() = mapOf(
         "statusCode" to statusCode,
